@@ -36,16 +36,17 @@ if __name__ == "__main__":
         repos_excluded=[
             "https://github.com/leanprover-community/mathlib4_with_LeanInfer",
         ],
-        repos_included=args.repos_included,
-        # repos_included=[
-        #     # "https://github.com/dwrensha/compfiles",
-        #     # "https://github.com/goens/lost-pop-lean",
-        #     # "https://github.com/RustyYato/lean-algebra",
-        #     # "https://github.com/Junology/dijkstra",
-        #     # "https://github.com/arthurpaulino/viper",
-        #     # "https://github.com/isubasinghe/leftpad-lean",
-        #     # "https://github.com/FizzyElt/lean-pratice",
-        # ],
+        # repos_included=args.repos_included,
+        repos_included=[
+            "https://github.com/leanprover-community/mathlib4"
+            # "https://github.com/dwrensha/compfiles",
+            # "https://github.com/goens/lost-pop-lean",
+            # "https://github.com/RustyYato/lean-algebra",
+            # "https://github.com/Junology/dijkstra",
+            # "https://github.com/arthurpaulino/viper",
+            # "https://github.com/isubasinghe/leftpad-lean",
+            # "https://github.com/FizzyElt/lean-pratice",
+        ],
         max_num_repos=args.max_num_repos,
         # max_num_repos=1,
         ld_max_num_procs=args.ld_max_num_procs,
@@ -61,7 +62,7 @@ if __name__ == "__main__":
     )
 
     data.fetch_repos_and_update_database()
-    # data.build_lake()
+    data.build_lake()
     data.run_leandojo()
 
     data.report()

@@ -545,6 +545,11 @@ class Dataset:
                 num_tactics = 0
 
                 for thm in theorems:
+                    source_text = repo.get_source(
+                        filename=thm.filename,
+                        line_start=thm.line,
+                        line_end=thm.end_line
+                    )
                     tactics = [
                         {
                             "tactic": t.tactic,
@@ -565,6 +570,7 @@ class Dataset:
                             "start": list(thm.start),
                             "end": list(thm.end),
                             "traced_tactics": tactics,
+                            "source_text": source_text, # full theorem code including proof
                         }
                     )
                 oup_path = split_dir / f"{name}.json"
