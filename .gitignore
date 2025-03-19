@@ -50,6 +50,7 @@ coverage.xml
 .hypothesis/
 .pytest_cache/
 cover/
+cache/*
 
 # Translations
 *.mo
@@ -160,3 +161,4 @@ cython_debug/
 #.idea/
 
 poetry.lock
+/.lake

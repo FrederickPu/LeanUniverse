@@ -38,7 +38,7 @@ if __name__ == "__main__":
         ],
         # repos_included=args.repos_included,
         repos_included=[
-            "https://github.com/leanprover-community/mathlib4"
+            "https://github.com/leanprover-community/mathlib4",
             # "https://github.com/dwrensha/compfiles",
             # "https://github.com/goens/lost-pop-lean",
             # "https://github.com/RustyYato/lean-algebra",

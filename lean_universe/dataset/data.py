@@ -249,23 +249,23 @@ class Dataset:
                 logger.info(f"{print_prefix} is not a Lean4 repo.")
                 continue
 
-            # Filter out repositories with excluded licenses
-            if self.__license_excluded(info["license"]):
-                info["Excluded_license"] = True
-                info["is_correct"] = False
-                self.database["report"]["repos_incorrect_license"] += 1
-                self.database["repos"][url] = info
-                logger.info(f"{print_prefix} has an excluded license. Skipping...")
-                continue
+            # # Filter out repositories with excluded licenses
+            # if self.__license_excluded(info["license"]):
+            #     info["Excluded_license"] = True
+            #     info["is_correct"] = False
+            #     self.database["report"]["repos_incorrect_license"] += 1
+            #     self.database["repos"][url] = info
+            #     logger.info(f"{print_prefix} has an excluded license. Skipping...")
+            #     continue
 
-            # Filter out repositories that are in the exclude list
-            if self.repos_excluded and url in self.repos_excluded:
-                info["Excluded_repo"] = True
-                info["is_correct"] = False
-                self.database["report"]["repos_incorrect_exclusion"] += 1
-                self.database["repos"][url] = info
-                logger.info(f"{print_prefix} is in the exclude list. Skipping...")
-                continue
+            # # Filter out repositories that are in the exclude list
+            # if self.repos_excluded and url in self.repos_excluded:
+            #     info["Excluded_repo"] = True
+            #     info["is_correct"] = False
+            #     self.database["report"]["repos_incorrect_exclusion"] += 1
+            #     self.database["repos"][url] = info
+            #     logger.info(f"{print_prefix} is in the exclude list. Skipping...")
+            #     continue
 
             self.database["repos"][url] = info
             self.database["report"]["repos_correct"] += 1
@@ -545,11 +545,6 @@ class Dataset:
                 num_tactics = 0
 
                 for thm in theorems:
-                    source_text = repo.get_source(
-                        filename=thm.filename,
-                        line_start=thm.line,
-                        line_end=thm.end_line
-                    )
                     tactics = [
                         {
                             "tactic": t.tactic,
@@ -567,10 +562,11 @@ class Dataset:
                             "commit": traced_repo.repo.commit,
                             "file_path": self._get_file_path(traced_repo, thm),
                             "full_name": thm.theorem.full_name,
+                            "theorem_statement": thm.get_theorem_statement(),
+                            "tactic_proof": thm.get_tactic_proof(),
                             "start": list(thm.start),
                             "end": list(thm.end),
                             "traced_tactics": tactics,
-                            "source_text": source_text, # full theorem code including proof
                         }
                     )
                 oup_path = split_dir / f"{name}.json"
